@@ -13,13 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
 
 
         DB::table('clients')->insert([
@@ -31,31 +24,31 @@ class DatabaseSeeder extends Seeder
         DB::table('clients')->insert([
             'full_name' => 'Иван Иванов И',
             'is_female' => 0,
-            'tel' => 222222,
+            'tel' => 2222223,
             'address' => 'Волгоград',
         ]);
         DB::table('clients')->insert([
             'full_name' => 'Павел Иванов Л',
             'is_female' => 0,
-            'tel' => 89001234567,
+            'tel' => 79001234567,
             'address' => 'Саратов',
         ]);
         DB::table('clients')->insert([
             'full_name' => 'Екатерина Петрова К',
             'is_female' => 1,
-            'tel' => 89001234512,
+            'tel' => 79001234512,
             'address' => 'Волгоград',
         ]);
         DB::table('clients')->insert([
             'full_name' => 'Анастасия Павлова Н',
             'is_female' => 1,
-            'tel' => 89001234589,
+            'tel' => 79001234589,
             'address' => 'Волгоград',
         ]);
         DB::table('clients')->insert([
             'full_name' => 'Наталья Светлая О',
             'is_female' => 1,
-            'tel' => 89001234589,
+            'tel' => 79001234590,
             'address' => 'Волгоград',
         ]);
     }

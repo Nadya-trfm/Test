@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('full_name');
             $table->boolean('is_female');
-            $table->unsignedInteger('tel');
+            $table->unsignedBigInteger('tel')->unique();
             $table->text('address')->nullable();
             $table->timestamps();
         });
