@@ -14,29 +14,30 @@ class ClientsController extends Controller
 
     public function create(Request $request)
     {
-        $id = DB::table('clients')->insertGetId(
-            [
-                'full_name' => $request->input('full_name'),
-                'is_female' => $request->input('is_female'),
-                'tel' => $request->input('tel'),
-                'address' => $request->input('address'),
-            ]
-        );
+        $validatedData = $request->validate([
+            'full_name' => ['required', 'max:255', 'min:3'],
+            'is_female' => ['required', 'boolean'],
+            'tel' => ['required', 'unique:clients'],
+            'address' => []
+        ]);
+
+        $id = DB::table('clients')->insertGetId($validatedData);
+
         return response()->json(DB::table('clients')->where('id', $id)->get());
     }
 
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'full_name' => ['required', 'max:255', 'min:3'],
+            'is_female' => ['required', 'boolean'],
+            'tel' => ['required', 'unique:clients'],
+            'address' => []
+        ]);
         DB::table('clients')
             ->where('id', $id)
-            ->update(
-                [
-                    'full_name' => $request->input('full_name'),
-                    'is_female' => $request->input('is_female'),
-                    'tel' => $request->input('tel'),
-                    'address' => $request->input('address'),
-                ]
-            );
+            ->update($validatedData);
+
         return response()->json(DB::table('clients')->where('id', $id)->get());
     }
 
