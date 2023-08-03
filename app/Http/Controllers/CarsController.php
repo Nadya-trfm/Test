@@ -12,6 +12,14 @@ class CarsController extends Controller
         return response()->json(DB::table('cars')->paginate(4));
     }
 
+    public function getAllIsParked()
+    {
+        $result = DB::table('cars')
+            ->where('is_parked', '=', '1')
+            ->paginate(4);
+        return response()->json($result);
+    }
+
     public function create(Request $request): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
