@@ -32,6 +32,7 @@ Route::controller(ClientsController::class)->prefix('clients')->group(function (
 Route::controller(CarsController::class)->prefix('cars')->group(function () {
     Route::get('/getAll', 'getAll');
     Route::get('/getAllIsParked', 'getAllIsParked');
+    Route::get('/getAllByOwner/{ownerId}', 'getAllByOwner');
     Route::post('/create', 'create');
     Route::put('/update/{id}', 'update');
     Route::delete('/delete/{id}', 'delete');

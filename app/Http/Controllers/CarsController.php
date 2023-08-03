@@ -20,6 +20,14 @@ class CarsController extends Controller
         return response()->json($result);
     }
 
+    public function getAllByOwner($ownerId)
+    {
+        $result = DB::table('cars')
+            ->where('owner_id', '=', $ownerId)
+            ->paginate(4);
+        return response()->json($result);
+    }
+
     public function create(Request $request): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
