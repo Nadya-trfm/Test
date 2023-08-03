@@ -12,7 +12,7 @@ class ClientsController extends Controller
         return response()->json(DB::table('clients')->paginate(4));
     }
 
-    public function create(Request $request)
+    public function create(Request $request): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
             'full_name' => ['required', 'max:255', 'min:3'],
@@ -26,7 +26,7 @@ class ClientsController extends Controller
         return response()->json(DB::table('clients')->where('id', $id)->get());
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
             'full_name' => ['required', 'max:255', 'min:3'],
@@ -41,7 +41,7 @@ class ClientsController extends Controller
         return response()->json(DB::table('clients')->where('id', $id)->get());
     }
 
-    public function delete($id)
+    public function delete($id): \Illuminate\Http\JsonResponse
     {
         DB::table('clients')->where('id', $id)->delete();
         return response()->json([

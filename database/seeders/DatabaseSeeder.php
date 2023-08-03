@@ -51,5 +51,38 @@ class DatabaseSeeder extends Seeder
             'tel' => 79001234590,
             'address' => 'Волгоград',
         ]);
+
+        DB::table('cars')->insert([
+            'brand' => 'kia',
+            'model' => 'rio',
+            'body_color' => 'red',
+            'plate_number' => 'A100AA34',
+            'is_parked' => 0,
+            'owner_id' => 1
+        ]);
+        DB::table('cars')->insert([
+            'brand' => 'kia',
+            'model' => 'rio',
+            'body_color' => 'black',
+            'plate_number' => 'A101AA34',
+            'is_parked' => 1,
+            'owner_id' => 2
+        ]);
+        DB::table('cars')->insert([
+            'brand' => 'lada',
+            'model' => 'kalina',
+            'body_color' => 'red',
+            'plate_number' => 'A102AA134',
+            'is_parked' => 0,
+            'owner_id' => 2
+        ]);
+        DB::table('cars')->insert([
+            'brand' => 'kia',
+            'model' => 'rio',
+            'body_color' => 'yellow',
+            'plate_number' => 'A103AA34',
+            'is_parked' => 1,
+            'owner_id' => 3
+        ]);
     }
 }
