@@ -15,6 +15,7 @@ class ClientsController extends Controller
     public function  getAllWithCars(){
         $res = DB::table('clients')
             ->leftJoin('cars','clients.id','=','cars.owner_id')
+            ->select('clients.id','clients.full_name','cars.brand','cars.model','cars.body_color','cars.plate_number')
             ->paginate(4);
         return response()->json($res);
     }
