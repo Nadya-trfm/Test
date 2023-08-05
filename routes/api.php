@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(ClientsController::class)->prefix('clients')->group(function () {
     Route::get('/getAll', 'getAll');
+    Route::get('/getAllWithCars','getAllWithCars');
     Route::post('/create', 'create');
     Route::put('/update/{id}', 'update');
     Route::delete('/delete/{id}', 'delete');

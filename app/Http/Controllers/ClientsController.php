@@ -12,6 +12,13 @@ class ClientsController extends Controller
         return response()->json(DB::table('clients')->paginate(4));
     }
 
+    public function  getAllWithCars(){
+        $res = DB::table('clients')
+            ->leftJoin('cars','clients.id','=','cars.owner_id')
+            ->paginate(4);
+        return response()->json($res);
+    }
+
     public function create(Request $request): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
