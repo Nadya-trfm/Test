@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class ClientsController extends Controller
 {
@@ -12,22 +13,33 @@ class ClientsController extends Controller
         return response()->json(DB::table('clients')->paginate(4));
     }
 
-    public function  getAllWithCars(){
+    public function getAllWithCars()
+    {
         $res = DB::table('clients')
-            ->leftJoin('cars','clients.id','=','cars.owner_id')
-            ->select('clients.id','clients.full_name','cars.brand','cars.model','cars.body_color','cars.plate_number')
+            ->leftJoin('cars', 'clients.id', '=', 'cars.owner_id')
+            ->select('clients.id', 'clients.full_name', 'cars.brand', 'cars.model', 'cars.body_color', 'cars.plate_number')
             ->paginate(4);
         return response()->json($res);
     }
 
     public function create(Request $request): \Illuminate\Http\JsonResponse
     {
-        $validatedData = $request->validate([
-            'full_name' => ['required', 'max:255', 'min:3'],
+        $validator = validator($request->all(),[
+            'full_name' => ['max:255', 'min:3'],
             'is_female' => ['required', 'boolean'],
             'tel' => ['required', 'unique:clients'],
             'address' => []
         ]);
+
+
+        try {
+            $validatedData = $validator->validate();
+        } catch (ValidationException $e) {
+            return response()->json([
+               $validator->errors()
+            ], 422);
+        }
+
 
         $id = DB::table('clients')->insertGetId($validatedData);
 
@@ -36,12 +48,23 @@ class ClientsController extends Controller
 
     public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $validatedData = $request->validate([
-            'full_name' => ['required', 'max:255', 'min:3'],
+        $validator = validator($request->all(),[
+            'full_name' => ['max:255', 'min:3'],
             'is_female' => ['required', 'boolean'],
             'tel' => ['required', 'unique:clients'],
             'address' => []
         ]);
+
+
+        try {
+            $validatedData = $validator->validate();
+        } catch (ValidationException $e) {
+            return response()->json([
+                $validator->errors()
+            ], 422);
+        }
+
+
         DB::table('clients')
             ->where('id', $id)
             ->update($validatedData);
