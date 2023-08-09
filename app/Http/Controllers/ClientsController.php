@@ -54,7 +54,7 @@ class ClientsController extends Controller
         if ($res->exists()) {
             return response()->json($res->get());
         } else {
-            return response()->json(['message' => 'Студент не найден'], 404);
+            return response()->json(['message' => 'Клиент не найден'], 404);
         }
 
     }

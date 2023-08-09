@@ -37,6 +37,7 @@ Route::controller(CarsController::class)->prefix('cars')->group(function () {
     Route::get('/getAllByOwner/{ownerId}', 'getAllByOwner');
     Route::post('/create', 'create');
     Route::put('/update/{id}', 'update');
+    Route::get('/update/{id}', 'getOne');
     Route::delete('/delete/{id}', 'delete');
 });
 
