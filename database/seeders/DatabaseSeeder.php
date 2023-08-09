@@ -84,5 +84,45 @@ class DatabaseSeeder extends Seeder
             'is_parked' => 1,
             'owner_id' => 3
         ]);
+        DB::table('cars')->insert([
+            'brand' => 'lada',
+            'model' => 'kalina',
+            'body_color' => 'red',
+            'plate_number' => 'A112AA134',
+            'is_parked' => 0,
+            'owner_id' => 4
+        ]);
+        DB::table('cars')->insert([
+            'brand' => 'kia',
+            'model' => 'rio',
+            'body_color' => 'yellow',
+            'plate_number' => 'A133AA34',
+            'is_parked' => 0,
+            'owner_id' => 5
+        ]);
+        DB::table('cars')->insert([
+            'brand' => 'kia',
+            'model' => 'rio',
+            'body_color' => 'yellow',
+            'plate_number' => 'A135AA34',
+            'is_parked' => 1,
+            'owner_id' => 6
+        ]);
+        DB::table('cars')->insert([
+            'brand' => 'lada',
+            'model' => 'kalina',
+            'body_color' => 'red',
+            'plate_number' => 'И222AA134',
+            'is_parked' => 1,
+            'owner_id' => 6
+        ]);
+        DB::table('cars')->insert([
+            'brand' => 'kia',
+            'model' => 'rio',
+            'body_color' => 'yellow',
+            'plate_number' => 'A234AA34',
+            'is_parked' => 0,
+            'owner_id' => 6
+        ]);
     }
 }
