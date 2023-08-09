@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use function PHPUnit\Framework\isEmpty;
 
 class ClientsController extends Controller
 {
@@ -24,7 +26,7 @@ class ClientsController extends Controller
 
     public function create(Request $request): \Illuminate\Http\JsonResponse
     {
-        $validator = validator($request->all(),[
+        $validator = validator($request->all(), [
             'full_name' => ['max:255', 'min:3'],
             'is_female' => ['required', 'boolean'],
             'tel' => ['required', 'unique:clients'],
@@ -35,9 +37,9 @@ class ClientsController extends Controller
         try {
             $validatedData = $validator->validate();
         } catch (ValidationException $e) {
-            return response()->json([
-               $validator->errors()
-            ], 422);
+            return response()->json(
+                $validator->errors()
+                , 422);
         }
 
 
@@ -46,12 +48,24 @@ class ClientsController extends Controller
         return response()->json(DB::table('clients')->where('id', $id)->get());
     }
 
+    public function getOne($id): \Illuminate\Http\JsonResponse
+    {
+        $res = DB::table('clients')->where('id', $id);
+        if ($res->exists()) {
+            return response()->json($res->get());
+        } else {
+            return response()->json(['message' => 'Студент не найден'], 404);
+        }
+
+    }
+
+
     public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $validator = validator($request->all(),[
+        $validator = validator($request->all(), [
             'full_name' => ['max:255', 'min:3'],
             'is_female' => ['required', 'boolean'],
-            'tel' => ['required', 'unique:clients'],
+            'tel' => ['required',  Rule::unique('clients')->ignore($id),],
             'address' => []
         ]);
 
@@ -59,9 +73,9 @@ class ClientsController extends Controller
         try {
             $validatedData = $validator->validate();
         } catch (ValidationException $e) {
-            return response()->json([
+            return response()->json(
                 $validator->errors()
-            ], 422);
+                , 422);
         }
 
 

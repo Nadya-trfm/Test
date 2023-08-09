@@ -25,6 +25,7 @@ Route::controller(ClientsController::class)->prefix('clients')->group(function (
     Route::get('/getAllWithCars','getAllWithCars');
     Route::post('/create', 'create');
     Route::put('/update/{id}', 'update');
+    Route::get('/update/{id}', 'getOne');
     Route::delete('/delete/{id}', 'delete');
 });
 
