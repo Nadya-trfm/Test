@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             'model' => 'rio',
             'body_color' => 'red',
             'plate_number' => 'A100AA34',
-            'is_parked' => 0,
+            'is_parked' => 1,
             'owner_id' => 1
         ]);
         DB::table('cars')->insert([
@@ -89,7 +89,7 @@ class DatabaseSeeder extends Seeder
             'model' => 'kalina',
             'body_color' => 'red',
             'plate_number' => 'A112AA134',
-            'is_parked' => 0,
+            'is_parked' => 1,
             'owner_id' => 4
         ]);
         DB::table('cars')->insert([
